@@ -1,3 +1,4 @@
+import SideBar from './components/SideBar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -16,7 +17,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className='min-h-screen flex flex-col'>
+        <header className='p-5'>
+          Star Wars
+        </header>
+        <div className='flex'>
+          <aside>
+            <SideBar />
+          </aside>
+          <main>{children}</main>
+        </div>
+        <footer className='p-5 mt-auto w-full'>
+          Star Wars Footer
+        </footer>
+      </body>
     </html>
   )
 }
