@@ -9,7 +9,13 @@ import { getSlugFromUrl } from '@/app/utils/helpers';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
 
-const Planets: React.FC = async () => {
+interface Props {
+  searchParams: {
+    [key: string]: string | string[] | undefined
+  }
+}
+
+async function Planets({ searchParams }: Props) {
 
   const { data } = await getData<{results: Planet[]}>('/planets');
 
@@ -20,17 +26,17 @@ const Planets: React.FC = async () => {
           data?.results && data.results.map((res: Planet) => {
             return (
               <li key={res.name} className="border-solid border-2 border-blue-800 bg-blue-300">
-                <div className="w-full h-[100px] bg-blue-500 relative">
-                  <Image
-                    src={imagesObj[toSnakeCase(res.name) as keyof typeof imagesObj] || imagesObj['no_image']}
-                    fill
-                    objectFit='contain'
-                    alt=''
-                  />
-                </div>
                 <Link href={`${getSlugFromUrl(res.url)}`} className="block h-full w-full">
+                  <div className="w-full h-[100px] bg-blue-500 relative">
+                    <Image
+                      src={imagesObj[toSnakeCase(res.name) as keyof typeof imagesObj] || imagesObj['no_image']}
+                      fill
+                      objectFit='contain'
+                      alt=''
+                    />
+                  </div>
                   <div className='p-2'>{res.name}</div>
-                  <div className='p-2'>{res.population}</div>
+                  <div className='p-2'>Population: {res.population}</div>
                 </Link>
               </li>
             );

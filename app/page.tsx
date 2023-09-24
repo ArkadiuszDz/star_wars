@@ -12,6 +12,7 @@ export default async function Home() {
       <List>
         {
           data?.results && data.results.map(character => {
+            console.log(getSlugFromUrl(character.url), character.url, 'url');
             return (
               <ListItem
                 key={character.name}
