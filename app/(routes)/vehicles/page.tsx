@@ -1,15 +1,11 @@
-import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import Pagination from '@/app/components/Pagination';
 import List from '@/app/components/List';
-import ListItem from '@/app/components/ListItem';
-
+import Thumbnail from '@/app/components/Thumbnail';
 import { getData } from '@/app/utils/api';
 import { getSlugFromUrl } from '@/app/utils/helpers';
-import { imagesObj } from '@/app/utils/images';
-import { toSnakeCase } from '@/app/utils/helpers';
+import styles from '@/app/Common.module.scss';
 
 interface ReturnType extends CommonReturnType {
   results: Vehicle[];
@@ -27,18 +23,13 @@ async function Vehicles({ searchParams }: PageComponentProps) {
         {
           data?.results && data.results.map((res: Vehicle) => {
             return (
-              <li key={res.name} className="border-solid border-2 border-blue-800 bg-blue-300">
-                <Link href={`${getSlugFromUrl(res.url)}`} className="block h-full w-full">
-                  <div className="w-full h-[100px] bg-blue-500 relative">
-                    <Image
-                      src={imagesObj[toSnakeCase(res.name) as keyof typeof imagesObj] || imagesObj['no_image']}
-                      fill
-                      objectFit='contain'
-                      alt=''
-                    />
+              <li key={res.name} className={styles['list-item']}>
+                <Link href={`${getSlugFromUrl(res.url)}`}>
+                  <Thumbnail name={res.name}/>
+                  <div className={styles['text-container']}>
+                    <p><strong>{res.name}</strong></p>
+                    <p><strong>Manufacturer: </strong>{res.manufacturer}</p>
                   </div>
-                  <div className='p-2'>{res.name}</div>
-                  <div className='p-2'>Manufacturer: {res.manufacturer}</div>
                 </Link>
               </li>
             );

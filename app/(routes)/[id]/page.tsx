@@ -1,9 +1,13 @@
-import React from 'react';
+import Image from 'next/image';
 
 import AsyncData from '@/app/components/AsyncData';
 import AsyncList from '@/app/components/AsyncList';
 import AsyncLink from '@/app/components/AsyncLink';
 import { getData } from '@/app/utils/api';
+import { imagesObj } from '@/app/utils/images';
+import { toSnakeCase } from '@/app/utils/helpers';
+
+import styles from './Person.module.scss';
 
 interface Props {
   params: {
@@ -17,25 +21,35 @@ async function Character({ params: { id }}: Props) {
   const { vehicles, name, homeworld, starships, species } = data;
 
   return (
-    <div>
-      <p>{name}</p>
-      <p className='text-white'>Homeworld:{" "}
-        <AsyncData<Planet> url={homeworld}>
-          <AsyncLink<Planet> />
+    <div className={styles.container}>
+      <div className={styles['image-container']}>
+        <Image
+          src={imagesObj[toSnakeCase(name) as keyof typeof imagesObj] || imagesObj['no_image']}
+          fill
+          objectFit='contain'
+          alt=''
+        />
+      </div>
+      <div className={styles['text-container']}>
+        <h1 className={styles.header}>{name}</h1>
+        <p><strong>Homeworld:</strong>{" "}
+          <AsyncData<Planet> url={homeworld}>
+            <AsyncLink<Planet> />
+          </AsyncData>
+        </p>
+        <p><strong>Vehicles:</strong></p>
+        <AsyncData<Vehicle> url={vehicles}>
+          <AsyncList<Vehicle> />
         </AsyncData>
-      </p>
-      <p className='text-white'>Vehicles:</p>
-      <AsyncData<Vehicle> url={vehicles}>
-        <AsyncList<Vehicle> />
-      </AsyncData>
-      <p className='text-white'>Starships:</p>
-      <AsyncData<Starship> url={starships}>
-        <AsyncList<Starship> />
-      </AsyncData>
-      <p className='text-white'>Species:</p>
-      <AsyncData<Species> url={species}>
-        <AsyncList<Species> />
-      </AsyncData>
+        <p><strong>Starships:</strong></p>
+        <AsyncData<Starship> url={starships}>
+          <AsyncList<Starship> />
+        </AsyncData>
+        <p><strong>Species:</strong></p>
+        <AsyncData<Species> url={species}>
+          <AsyncList<Species> />
+        </AsyncData>
+      </div>
     </div>
   );
 };

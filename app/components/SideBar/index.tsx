@@ -1,9 +1,11 @@
 import NavLink from '@/app/components/NavLink';
 import navLinks from '@/app/utils/navigation';
 
+import styles from './SideBar.module.scss';
+
 function SideBar() {
   return (
-    <nav>
+    <nav className={styles.nav}>
       {
         navLinks.map(link => {
           return (

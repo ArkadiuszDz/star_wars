@@ -1,0 +1,22 @@
+.pagination {
+  margin: 20px auto;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-link {
+  display: inline-block;
+  margin: 0 5px;
+  text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+  font-size: 18px;
+  font-weight: bold;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.active {
+  color: white;
+}

@@ -1,5 +1,6 @@
 import SideBar from '@/app/components/SideBar';
 import './globals.scss';
+import styles from './Layout.module.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -21,11 +22,11 @@ export default function RootLayout({
         <header className='p-5'>
           Star Wars
         </header>
-        <div className='flex'>
+        <div className={styles.container}>
           <aside>
             <SideBar />
           </aside>
-          <main>{children}</main>
+          <main className={styles.main}>{children}</main>
         </div>
         <footer className='p-5 mt-auto w-full'>
           Star Wars Footer

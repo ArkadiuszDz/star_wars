@@ -4,21 +4,25 @@ import { getData } from '../utils/api';
 
 const useFetchMultiple = <T>(urls?: string[] | string) => {
 
-  const [state, setState] = useState<T | null>(null);
+  const [state, setState] = useState<T>();
 
   useEffect(() => {
     const fetchData = async () => {
-      let resultsArray: T = [];
+      let resultsArray: T[] = [];
       if (Array.isArray(urls)) {
         for (let url of urls) {
           const { data } = await getData(getSlugFromUrl(url));
-          resultsArray = [...resultsArray, data];
-          setState(resultsArray);
+          if (data) {
+            resultsArray = [...resultsArray, data];
+            setState(resultsArray);
+          }
         }
       }
       if (typeof urls === "string") {
         const { data } = await getData(getSlugFromUrl(urls));
-        setState(data);
+        if (data) {
+          setState(data);
+        }
       }
     };
 

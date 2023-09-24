@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import cn from 'classnames';
 
+import styles from './Pagination.module.scss';
+
 interface Props {
   currentPage: number;
   count: number;
@@ -19,23 +21,23 @@ function Pagination({ count, nextLink, prevLink, slug, currentPage, limit = 10 }
   }
 
   return (
-    <>
-      {prevLink && <Link href={prevLink || ''} className='text-white'>Previous</Link>}
+    <div className={styles.pagination}>
+      {prevLink && <Link href={prevLink || ''} className={styles['pagination-link']}>Previous</Link>}
       {
         [...Array(numOfPages)].map((_, index: number) => {
           return (
             <Link
               href={`${slug}/?page=${index + 1}`}
               key={index}
-              className={cn(currentPage === (index + 1) ? 'text-blue-500' : 'text-white')}
+              className={cn(`${styles['pagination-link']}`, { [styles.active]: currentPage === (index + 1) })}
             >
               {index + 1}
             </Link>
           );
         })
       }
-      {nextLink && <Link href={nextLink || ''} className='text-white'>Next</Link>}
-    </>
+      {nextLink && <Link href={nextLink || ''} className={styles['pagination-link']}>Next</Link>}
+    </div>
   );
 };
 
