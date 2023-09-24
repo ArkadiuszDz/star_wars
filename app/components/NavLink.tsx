@@ -17,7 +17,7 @@ const NavLink: React.FC<Props> = ({ label, url }) => {
 
   return (
     <Link
-      className={cn('block p-1', {'bg-blue-700 text-3xl': isActivePath})}
+      className={cn('block p-1 text-white', { 'bg-blue-700 text-1xl': isActivePath })}
       href={url}
     >
       {label}
