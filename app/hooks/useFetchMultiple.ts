@@ -4,7 +4,7 @@ import { getData } from '../utils/api';
 
 const useFetchMultiple = <T>(urls?: string[] | string) => {
 
-  const [state, setState] = useState<T>();
+  const [state, setState] = useState<T | T[] | {}>({});
 
   useEffect(() => {
     const fetchData = async () => {
