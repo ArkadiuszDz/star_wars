@@ -1,5 +1,5 @@
-import NavLink from './NavLink';
-import navLinks from '../utils/navigation';
+import NavLink from '@/app/components/NavLink';
+import navLinks from '@/app/utils/navigation';
 
 function SideBar() {
   return (

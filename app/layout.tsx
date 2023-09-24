@@ -1,4 +1,4 @@
-import SideBar from './components/SideBar';
+import SideBar from '@/app/components/SideBar';
 import './globals.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';

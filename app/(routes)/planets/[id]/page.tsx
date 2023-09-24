@@ -1,7 +1,7 @@
 import React from 'react';
 import { getData } from '@/app/utils/api';
 import AsyncData from '@/app/components/AsyncData';
-import List from '@/app/components/ClientList';
+import List from '@/app/components/AsyncList';
 
 interface Props {
   params: {

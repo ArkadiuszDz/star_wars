@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 import Pagination from '@/app/components/Pagination';
 import List from '@/app/components/List';
-import ListItem from '@/app/components/ListItem';
 
 import { getData } from '@/app/utils/api';
 import { getSlugFromUrl } from '@/app/utils/helpers';

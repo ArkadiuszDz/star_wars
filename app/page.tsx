@@ -1,7 +1,7 @@
-import List from './components/List';
-import ListItem from './components/ListItem';
+import List from '@/app/components/List';
+import ListItem from '@/app/components/ListItem';
 import Pagination from '@/app/components/Pagination';
-import { getSlugFromUrl } from './utils/helpers';
+import { getSlugFromUrl, getCharacterIdFromSlug } from '@/app/utils/helpers';
 import { getData } from '@/app/utils/api';
 
 interface ReturnType extends CommonReturnType {
@@ -13,17 +13,20 @@ export default async function Home({ searchParams }: PageComponentProps) {
   const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1;
 
   const { data } = await getData<ReturnType>(`/people/?page=${page}`);
+  const prevSlug = getSlugFromUrl(data.previous);
+  const nextSlug = getSlugFromUrl(data.next);
 
   return (
     <div>
       <List>
         {
           data?.results && data.results.map(character => {
+            const slug = getSlugFromUrl(character.url);
             return (
               <ListItem
                 key={character.name}
                 name={character.name}
-                slug={getSlugFromUrl(character.url)}
+                slug={getCharacterIdFromSlug(slug)}
               />
             );
           })
@@ -32,8 +35,8 @@ export default async function Home({ searchParams }: PageComponentProps) {
       <Pagination
         count={data.count}
         slug=''
-        nextLink={getSlugFromUrl(data.next)}
-        prevLink={getSlugFromUrl(data.previous)}
+        nextLink={getCharacterIdFromSlug(nextSlug)}
+        prevLink={getCharacterIdFromSlug(prevSlug)}
         currentPage={page}
       />
     </div>

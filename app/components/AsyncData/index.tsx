@@ -10,7 +10,7 @@ interface Props {
 
 function AsyncData<T>({ url, children }: Props) {
   const data = useFetchMultiple<T>(url);
-
+  
   return (
     <>
       {

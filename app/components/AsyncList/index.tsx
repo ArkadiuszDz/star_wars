@@ -2,17 +2,19 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { getSlugFromUrl } from '@/app/utils/helpers';
+import { getSlugFromUrl, getCharacterIdFromSlug } from '@/app/utils/helpers';
 
 function List<T extends Person | Planet | Film | Vehicle | Species | Starship>({ data }: { data?: T[] }) {
+
   return (
     <ul>
       {
         data && data.map((e: T) => {
+          const slug = getSlugFromUrl(e.url);
           if ('title' in e) {
             return (
               <li key={e.title}>
-                <Link href={getSlugFromUrl(e.url)} className="text-white">
+                <Link href={getCharacterIdFromSlug(slug)} className="text-white">
                   {e.title}
                 </Link>
               </li>
@@ -20,7 +22,7 @@ function List<T extends Person | Planet | Film | Vehicle | Species | Starship>({
           }
           return (
             <li key={e.name}>
-              <Link href={getSlugFromUrl(e.url)} className="text-white">
+              <Link href={getCharacterIdFromSlug(slug)} className="text-white">
                 {e.name}
               </Link>
             </li>

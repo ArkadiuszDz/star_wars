@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 
-import useActivePath from '../hooks/useActivePath';
+import useActivePath from '@/app/hooks/useActivePath';
 
 interface Props {
   label: string;

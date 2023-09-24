@@ -1,6 +1,9 @@
 import React from 'react';
-import { getData } from '@/app/utils/api';
+
 import AsyncData from '@/app/components/AsyncData';
+import AsyncList from '@/app/components/AsyncList';
+import AsyncLink from '@/app/components/AsyncLink';
+import { getData } from '@/app/utils/api';
 
 interface Props {
   params: {
@@ -16,10 +19,23 @@ async function Character({ params: { id }}: Props) {
   return (
     <div>
       <p>{name}</p>
-      <AsyncData<Planet> url={homeworld} />
-      <AsyncData<Vehicle> url={vehicles} />
-      <AsyncData<Starship> url={starships} />
-      <AsyncData<Species> url={species} />
+      <p className='text-white'>Homeworld:{" "}
+        <AsyncData<Planet> url={homeworld}>
+          <AsyncLink<Planet> />
+        </AsyncData>
+      </p>
+      <p className='text-white'>Vehicles:</p>
+      <AsyncData<Vehicle> url={vehicles}>
+        <AsyncList<Vehicle> />
+      </AsyncData>
+      <p className='text-white'>Starships:</p>
+      <AsyncData<Starship> url={starships}>
+        <AsyncList<Starship> />
+      </AsyncData>
+      <p className='text-white'>Species:</p>
+      <AsyncData<Species> url={species}>
+        <AsyncList<Species> />
+      </AsyncData>
     </div>
   );
 };
