@@ -1,18 +1,24 @@
 import List from './components/List';
 import ListItem from './components/ListItem';
+import Pagination from '@/app/components/Pagination';
 import { getSlugFromUrl } from './utils/helpers';
 import { getData } from '@/app/utils/api';
 
-export default async function Home() {
+interface ReturnType extends CommonReturnType {
+  results: Person[];
+}
 
-  const { data } = await getData<{results: Person[]}>('/people');
+export default async function Home({ searchParams }: PageComponentProps) {
+
+  const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1;
+
+  const { data } = await getData<ReturnType>(`/people/?page=${page}`);
 
   return (
     <div>
       <List>
         {
           data?.results && data.results.map(character => {
-            console.log(getSlugFromUrl(character.url), character.url, 'url');
             return (
               <ListItem
                 key={character.name}
@@ -23,6 +29,13 @@ export default async function Home() {
           })
         }
       </List>
+      <Pagination
+        count={data.count}
+        slug=''
+        nextLink={getSlugFromUrl(data.next)}
+        prevLink={getSlugFromUrl(data.previous)}
+        currentPage={page}
+      />
     </div>
   )
 }

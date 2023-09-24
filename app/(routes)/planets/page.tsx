@@ -1,23 +1,25 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { getData } from '@/app/utils/api';
+import Pagination from '@/app/components/Pagination';
 import List from '@/app/components/List';
 import ListItem from '@/app/components/ListItem';
-import Link from 'next/link';
+
+import { getData } from '@/app/utils/api';
 import { getSlugFromUrl } from '@/app/utils/helpers';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
 
-interface Props {
-  searchParams: {
-    [key: string]: string | string[] | undefined
-  }
+interface ReturnType extends CommonReturnType {
+  results: Planet[];
 }
 
-async function Planets({ searchParams }: Props) {
+async function Planets({ searchParams }: PageComponentProps) {
 
-  const { data } = await getData<{results: Planet[]}>('/planets');
+  const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1;
+
+  const { data } = await getData<ReturnType>(`/planets/?page=${page}`);
 
   return (
     <div>
@@ -43,6 +45,13 @@ async function Planets({ searchParams }: Props) {
           })
         }
       </List>
+      <Pagination
+        count={data.count}
+        slug='/planets'
+        nextLink={getSlugFromUrl(data.next)}
+        prevLink={getSlugFromUrl(data.previous)}
+        currentPage={page}
+      />
     </div>
   );
 };

@@ -11,14 +11,14 @@ const useFetchMultiple = <T>(urls?: string[] | string) => {
       let resultsArray: T = [];
       if (Array.isArray(urls)) {
         for (let url of urls) {
-          const { results } = await getData(getSlugFromUrl(url));
+          const { data } = await getData(getSlugFromUrl(url));
           resultsArray = [...resultsArray, results];
           setState(resultsArray);
         }
       }
       if (typeof urls === "string") {
-        const { results } = await getData(getSlugFromUrl(urls));
-        setState(results);
+        const { data } = await getData(getSlugFromUrl(urls));
+        setState(data);
       }
     };
 

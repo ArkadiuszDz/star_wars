@@ -1,9 +1,7 @@
-import React from 'react';
-
 import NavLink from './NavLink';
 import navLinks from '../utils/navigation';
 
-const SideBar: React.FC = () => {
+function SideBar() {
   return (
     <nav>
       {

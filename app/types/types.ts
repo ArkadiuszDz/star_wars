@@ -108,3 +108,15 @@ interface Vehicle {
   edited: string;
   url: string;
 }
+
+interface CommonReturnType {
+  count: number;
+  next: string;
+  previous: string;
+}
+
+interface PageComponentProps {
+  searchParams: {
+    [key: string]: string | string[] | undefined
+  }
+}

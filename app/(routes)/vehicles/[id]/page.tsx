@@ -1,4 +1,3 @@
-import React from 'react';
 
 interface Props {
   params: {
@@ -6,7 +5,7 @@ interface Props {
   }
 }
 
-const Vehicle: React.FC<Props> = ({ params: { id }}) => {
+function Vehicle({ params: { id }}: Props) {
   return (
     <div>
       Vehicle {id}

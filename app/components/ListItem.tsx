@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { imagesObj } from '@/app/utils/images';
@@ -9,7 +8,7 @@ interface Props {
   name: string;
 }
 
-const ListItem: React.FC<Props> = ({ slug, name }) => {
+function ListItem({ slug, name }: Props) {
 
   return (
     <li className="border-solid border-2 border-blue-800 bg-blue-300 hover:bg-gray-100">
