@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { getData } from '@/app/utils/api';
 import AsyncData from '@/app/components/AsyncData';
 import List from '@/app/components/AsyncList';
+import NotFound from '@/app/components/NotFound';
+import { ResponseCodes } from '@/app/utils/constants';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
 
@@ -15,8 +17,12 @@ interface Props {
 }
 
 async function Starship({ params: { id }}: Props) {
-  const { data } = await getData<Starship>(`/starships/${id}`);
+  const { data, status } = await getData<Starship>(`/starships/${id}`);
   const { name, starship_class, pilots, films } = data;
+
+  if (status === ResponseCodes.NotFound) {
+    return <NotFound />
+  }
 
   return (
     <div className={styles.container}>

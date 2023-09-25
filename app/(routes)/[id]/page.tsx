@@ -3,9 +3,11 @@ import Image from 'next/image';
 import AsyncData from '@/app/components/AsyncData';
 import AsyncList from '@/app/components/AsyncList';
 import AsyncLink from '@/app/components/AsyncLink';
+import NotFound from '@/app/components/NotFound';
 import { getData } from '@/app/utils/api';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
+import { ResponseCodes } from '@/app/utils/constants';
 
 import styles from './Person.module.scss';
 
@@ -17,8 +19,13 @@ interface Props {
 
 async function Character({ params: { id }}: Props) {
 
-  const { data } = await getData<Person>(`/people/${id}`);
+  const { data, status } = await getData<Person>(`/people/${id}`);
+
   const { vehicles, name, homeworld, starships, species } = data;
+
+  if (status === ResponseCodes.NotFound) {
+    return <NotFound />
+  }
 
   return (
     <div className={styles.container}>

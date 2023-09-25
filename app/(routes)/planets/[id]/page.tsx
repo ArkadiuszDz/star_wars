@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { getData } from '@/app/utils/api';
 import AsyncData from '@/app/components/AsyncData';
 import List from '@/app/components/AsyncList';
+import NotFound from '@/app/components/NotFound';
+import { ResponseCodes } from '@/app/utils/constants';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
 
@@ -14,9 +16,13 @@ interface Props {
   }
 }
 
-const Planet: React.FC<Props> = async ({ params: { id }}) => {
-  const { data } = await getData<Planet>(`/planets/${id}`);
+async function Planet({ params: { id }}: Props) {
+  const { data, status } = await getData<Planet>(`/planets/${id}`);
   const { population, name, residents, films } = data;
+
+  if (status === ResponseCodes.NotFound) {
+    return <NotFound />
+  }
 
   return (
     <div className={styles.container}>

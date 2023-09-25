@@ -1,7 +1,11 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+
 import SideBar from '@/app/components/SideBar';
+
 import './globals.scss';
 import styles from './Layout.module.scss';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,9 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='min-h-screen flex flex-col'>
-        <header className='p-5'>
-          Star Wars
+      <body className={styles.body}>
+        <header className={styles.header}>
+          <Link href="/">
+            <Image src='/images/sw_logo_yellow.png' width={200} height={90} alt='star wars logo'/>
+          </Link>
         </header>
         <div className={styles.container}>
           <aside>
@@ -28,8 +34,8 @@ export default function RootLayout({
           </aside>
           <main className={styles.main}>{children}</main>
         </div>
-        <footer className='p-5 mt-auto w-full'>
-          Star Wars Footer
+        <footer className={styles.footer}>
+          <p>All rights reserved®</p>
         </footer>
       </body>
     </html>

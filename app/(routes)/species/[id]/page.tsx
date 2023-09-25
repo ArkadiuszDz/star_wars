@@ -4,6 +4,8 @@ import { getData } from '@/app/utils/api';
 import AsyncData from '@/app/components/AsyncData';
 import List from '@/app/components/AsyncList';
 import AsyncLink from '@/app/components/AsyncLink';
+import NotFound from '@/app/components/NotFound';
+import { ResponseCodes } from '@/app/utils/constants';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
 
@@ -16,8 +18,12 @@ interface Props {
 }
 
 async function Species({ params: { id }}: Props) {
-  const { data } = await getData<Species>(`/species/${id}`);
+  const { data, status } = await getData<Species>(`/species/${id}`);
   const { homeworld, name, people, films } = data;
+
+  if (status === ResponseCodes.NotFound) {
+    return <NotFound />
+  }
 
   return (
     <div className={styles.container}>

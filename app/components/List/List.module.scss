@@ -4,6 +4,8 @@ $desktop-md: 1420px;
 $desktop-lg: 1680px;
 
 .list {
+  list-style: none;
+
   @media (min-width: $tablet) {
     display: grid;
     gap: 0.5rem;
