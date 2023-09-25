@@ -52,7 +52,7 @@ async function Character({ params: { id }}: Props) {
         <AsyncData<Starship> url={starships}>
           <AsyncList<Starship> />
         </AsyncData>
-        <p><strong>Species:</strong></p>
+        <p><strong>Race:</strong></p>
         <AsyncData<Species> url={species}>
           <AsyncList<Species> />
         </AsyncData>
