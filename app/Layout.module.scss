@@ -29,3 +29,36 @@
     font-size: 18px;
   }
 }
+
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  p {
+    color: white;
+  }
+
+  button {
+    background-color: yellow;
+    width: 100px;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
