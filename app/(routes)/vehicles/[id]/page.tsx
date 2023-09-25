@@ -8,7 +8,8 @@ import { ResponseCodes } from '@/app/utils/constants';
 import { imagesObj } from '@/app/utils/images';
 import { toSnakeCase } from '@/app/utils/helpers';
 
-import styles from './Vehicle.module.scss';
+import styles from '@/app/DetailsPage.module.scss';
+
 interface Props {
   params: {
     id: number;
