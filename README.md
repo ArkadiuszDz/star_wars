@@ -6,12 +6,14 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun run dev
+```
+
+## Unit test
+
+For unit tests run:
+
+```bash
+npm test
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
