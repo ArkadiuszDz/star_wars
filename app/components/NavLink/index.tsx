@@ -6,6 +6,8 @@ import cn from 'classnames';
 
 import useActivePath from '@/app/hooks/useActivePath';
 
+import styles from './NavLink.module.scss';
+
 interface Props {
   label: string;
   url: string;
@@ -17,7 +19,7 @@ const NavLink: React.FC<Props> = ({ label, url }) => {
 
   return (
     <Link
-      className={cn('block p-1 text-white', { 'bg-blue-700 text-1xl': isActivePath })}
+      className={cn(styles.navlink, { [styles.active]: isActivePath })}
       href={url}
     >
       {label}

@@ -3,17 +3,18 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getSlugFromUrl, getCharacterIdFromSlug } from '@/app/utils/helpers';
+import styles from './AsyncList.module.scss';
 
 function List<T extends Person | Planet | Film | Vehicle | Species | Starship>({ data }: { data?: T[] }) {
 
   return (
     <ul>
       {
-        data && data.map((e: T) => {
+        Array.isArray(data) && data.map((e: T) => {
           const slug = getSlugFromUrl(e.url);
           if ('title' in e) {
             return (
-              <li key={e.title}>
+              <li key={e.title} className={styles['list-item']}>
                 <Link href={getCharacterIdFromSlug(slug)} className="text-white">
                   {e.title}
                 </Link>
@@ -21,7 +22,7 @@ function List<T extends Person | Planet | Film | Vehicle | Species | Starship>({
             )
           }
           return (
-            <li key={e.name}>
+            <li key={e.name} className={styles['list-item']}>
               <Link href={getCharacterIdFromSlug(slug)} className="text-white">
                 {e.name}
               </Link>
