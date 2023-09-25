@@ -13,7 +13,7 @@ const useFetchMultiple = <T>(urls?: string[] | string) => {
         for (let url of urls) {
           const { data } = await getData(getSlugFromUrl(url));
           if (data) {
-            resultsArray = [...resultsArray, data];
+            resultsArray.push(data as T);
             setState(resultsArray);
           }
         }
