@@ -56,6 +56,7 @@ export const imagesObj = {
   palpatine: '/images/palpatine.jpeg',
   plo_koon: '/images/plo_koon.jpeg',
   polis_massa: '/images/polis_massa.jpeg',
+  quarsh_panaka: '/images/quarsh_panaka.jpeg',
   qui_gon_jinn: '/images/qui_gon_jinn.jpeg',
   r2_d2: '/images/r2_d2.jpeg',
   r5_d4: '/images/r5_d4.jpeg',

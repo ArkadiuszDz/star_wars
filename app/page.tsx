@@ -1,12 +1,8 @@
-import Link from 'next/link';
-
 import List from '@/app/components/List';
-import Thumbnail from '@/app/components/Thumbnail';
+import ListItem from '@/app/components/ListItem';
 import Pagination from '@/app/components/Pagination';
 import { getSlugFromUrl, getCharacterIdFromSlug } from '@/app/utils/helpers';
 import { getData } from '@/app/utils/api';
-
-import styles from './Common.module.scss';
 
 interface ReturnType extends CommonReturnType {
   results: Person[];
@@ -27,14 +23,13 @@ export default async function Home({ searchParams }: PageComponentProps) {
           data?.results && data.results.map(character => {
             const slug = getSlugFromUrl(character.url);
             return (
-              <li key={character.name} className={styles['list-item']}>
-                <Link href={getCharacterIdFromSlug(slug)}>
-                  <Thumbnail name={character.name}/>
-                  <div className={styles['text-container']}>
-                    <p><strong>{character.name}</strong></p>
-                  </div>
-                </Link>
-              </li>
+              <ListItem
+                key={character.name}
+                data={character}
+                header='name'
+                slug={getCharacterIdFromSlug(slug)}
+                info={[{label: 'Gender: ', accessor: 'gender'}]}
+              />
             );
           })
         }

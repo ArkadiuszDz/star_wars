@@ -1,27 +1,41 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { imagesObj } from '@/app/utils/images';
-import { toSnakeCase } from '@/app/utils/helpers';
+import Thumbnail from '@/app/components/Thumbnail';
+import { getCharacterIdFromSlug } from '@/app/utils/helpers';
+
+import styles from '@/app/components/ListItem/ListItem.module.scss';
+
+interface TextContent {
+  label?: string;
+  accessor: string;
+}
 
 interface Props {
   slug: string;
-  name: string;
+  header: keyof Person | keyof Film | keyof Planet | keyof Vehicle | keyof Starship | keyof Species;
+  info: TextContent[];
+  data: Person | Film | Planet | Vehicle | Starship | Species;
 }
 
-function ListItem({ slug, name }: Props) {
+function ListItem({ slug, header, info, data }: Props) {
 
   return (
-    <li className="border-solid border-2 border-blue-800 bg-blue-300 hover:bg-gray-100">
-      <Link href={`${slug}`} className="block h-full w-full text-white">
-        <div className="w-full h-[100px] bg-blue-500 relative">
-          <Image
-            src={imagesObj[toSnakeCase(name) as keyof typeof imagesObj] || imagesObj['no_image']}
-            fill
-            objectFit='contain'
-            alt=''
-          />
+    <li className={styles['list-item']}>
+      <Link href={getCharacterIdFromSlug(slug)}>
+        <Thumbnail name={data[header as keyof typeof data]}/>
+        <div className={styles['text-container']}>
+          <p>
+            <strong>{data[header as keyof typeof data]}</strong>
+          </p>
+          {
+            info && info.map(e => {
+              return (
+                <p key={data[e.accessor as keyof typeof data]}>
+                  {e.label && <strong>{e.label}: </strong>}{data[e.accessor as keyof typeof data]}
+                </p>
+              );
+            })
+          }
         </div>
-        <div className='p-2'>{name}</div>
       </Link>
     </li>
   );
