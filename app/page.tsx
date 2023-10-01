@@ -28,7 +28,7 @@ export default async function Home({ searchParams }: PageComponentProps) {
                 data={character}
                 header='name'
                 slug={getCharacterIdFromSlug(slug)}
-                info={[{label: 'Gender: ', accessor: 'gender'}]}
+                info={[{label: 'Gender', accessor: 'gender'}]}
               />
             );
           })
